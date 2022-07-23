@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <div>
+    <div class="container">
+      <div style="margin-bottom: 10px">
+        <a class="btn btn-success" href="/account/add/">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          新建号码</a>
+        <div style="float: right; width: 300px">
+          <form method="get">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="搜索" name="q" value={{ searchData }}>
+              <span class="input-group-btn">
+              <button class="btn btn-default" type="submit">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+              </button>
+            </span>
+            </div>
+          </form>
+        </div>
+
+      </div>
+      <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+          <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+          靓号列表
+        </div>
+
+        <!-- Table -->
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>号码</th>
+            <th>金额</th>
+            <th>级别</th>
+            <th>状态</th>
+            <th>操作</th>
+
+          </tr>
+          </thead>
+          <tbody>
+          {% for account in allAccount %}
+            <tr>
+              <td>{{ account.id }}</td>
+              <td>{{ account.mobile }}</td>
+              <td>{{ account.price }}</td>
+              <td>{{ account.get_lever_display }}</td>
+              <td>{{ account.get_status_display }}</td>
+              <td>
+                <a class="btn btn-primary btn-xs" href="/account/{{ account.id }}/edit/">编辑</a>
+                <a class="btn btn-danger btn-xs" href="/account/delete?nid={{ account.id }}">删除</a>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <nav aria-label="Page navigation">
+        <ul class="pagination">
+          {{pageString}}
+        </ul>
+      </nav>
+    </div>
+
+  </div>
+
+{% endblock %}

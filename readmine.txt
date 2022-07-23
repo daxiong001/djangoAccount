@@ -1,0 +1,21 @@
+查询：
+1、同时传多个参数条件，使用字典
+data_dict = {"mobile": 199999999, "id": 12}
+models.account.objects.filter(**data_dict)
+
+2、判断记录是否存在
+models.Account.objects.filter(mobile=mobile).exists()
+
+3、判断记录是否存在，排除当前id
+models.Account.objects.exclude(id=self.instance.pk).filter(mobile=mobile).exists()
+
+4、判断当前的的大小
+id__gt=12 大于12
+id__gte=12  大于等于12
+id__lt=12   小于12
+id__lte=12  小于等于12
+
+5、判断开头与结尾
+mobile_startswith=999   以999开头
+mobile_endswith=999   以999结尾
+mobile_contains=999   包含999
